@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/data/services/api_service.dart';
+import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
 import 'package:restaurant_api/style/colors/restaurant_colors.dart';
 import 'package:restaurant_api/ui/pages/restaurant_list_screen.dart';
@@ -16,8 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<RestaurantListProvider>(
           create: (_) => RestaurantListProvider(apiService: ApiService()),
+        ),
+        ChangeNotifierProvider<RestaurantDetailProvider>(
+          create: (_) => RestaurantDetailProvider(apiService: ApiService()),
         ),
       ],
       child: MaterialApp(

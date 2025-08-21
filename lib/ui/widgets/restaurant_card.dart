@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_api/data/models/restaurant.dart';
+import 'package:restaurant_api/ui/pages/restaurant_detail_screen.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
@@ -12,7 +13,14 @@ class RestaurantCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: () {
-          // TODO: Membuat halaman detail
+          // Navigasi ke halaman detail restoran
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  RestaurantDetailScreen(restaurantId: restaurant.id),
+            ),
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
