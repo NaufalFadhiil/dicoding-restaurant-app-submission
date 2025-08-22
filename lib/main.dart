@@ -4,6 +4,7 @@ import 'package:restaurant_api/data/services/api_service.dart';
 import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
 import 'package:restaurant_api/providers/restaurant_search_provider.dart';
+import 'package:restaurant_api/providers/theme_notifier.dart';
 import 'package:restaurant_api/style/colors/restaurant_colors.dart';
 import 'package:restaurant_api/ui/main_screen.dart';
 
@@ -27,26 +28,31 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<RestaurantSearchProvider>(
           create: (_) => RestaurantSearchProvider(apiService: ApiService()),
         ),
+        ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
       ],
-      child: MaterialApp(
-        title: 'Restaurant App',
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          brightness: Brightness.light,
-          primaryColor: RestaurantColors.teal.color,
-          appBarTheme: AppBarTheme(
-            backgroundColor: RestaurantColors.teal.color,
+      child: Consumer<ThemeNotifier>(
+        builder: (context, theme, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Restaurant App',
+          themeMode: theme.themeMode,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            brightness: Brightness.light,
+            primaryColor: RestaurantColors.teal.color,
+            appBarTheme: AppBarTheme(
+              backgroundColor: RestaurantColors.teal.color,
+            ),
           ),
-        ),
-        darkTheme: ThemeData(
-          fontFamily: 'Poppins',
-          brightness: Brightness.dark,
-          primaryColor: RestaurantColors.orange.color,
-          appBarTheme: AppBarTheme(
-            backgroundColor: RestaurantColors.orange.color,
+          darkTheme: ThemeData(
+            fontFamily: 'Poppins',
+            brightness: Brightness.dark,
+            primaryColor: RestaurantColors.orange.color,
+            appBarTheme: AppBarTheme(
+              backgroundColor: RestaurantColors.orange.color,
+            ),
           ),
+          home: const MainScreen(),
         ),
-        home: const MainScreen(),
       ),
     );
   }

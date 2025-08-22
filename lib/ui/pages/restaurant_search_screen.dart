@@ -10,7 +10,6 @@ class RestaurantSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search Restaurants')),
       body: Column(
         children: [
           Padding(
@@ -37,7 +36,9 @@ class RestaurantSearchScreen extends StatelessWidget {
               builder: (context, provider, child) {
                 if (provider.state is RestaurantSearchInitial) {
                   return const Center(
-                    child: Text('Masukkan kata kunci untuk menemukan restoran anda.'),
+                    child: Text(
+                      'Masukkan kata kunci untuk menemukan restoran anda.',
+                    ),
                   );
                 } else if (provider.state is RestaurantSearchLoading) {
                   return const Center(child: CircularProgressIndicator());

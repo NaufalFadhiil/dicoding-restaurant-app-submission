@@ -26,7 +26,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Restaurant List')),
       body: Consumer<RestaurantListProvider>(
         builder: (context, provider, child) {
           if (provider.state is RestaurantListLoading) {
@@ -51,4 +50,3 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     );
   }
 }
-
