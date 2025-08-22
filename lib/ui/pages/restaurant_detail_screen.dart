@@ -32,9 +32,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       appBar: AppBar(title: const Text('Restaurant Detail')),
       body: Consumer<RestaurantDetailProvider>(
         builder: (context, provider, child) {
-          if (provider.state is RestaurantDetailLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (provider.state is RestaurantDetailLoaded) {
+          if (provider.state is RestaurantDetailLoaded) {
             final restaurant = (provider.state as RestaurantDetailLoaded).data;
 
             return SingleChildScrollView(
@@ -100,7 +98,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
             final error = (provider.state as RestaurantDetailError).message;
             return Center(child: Text(error));
           } else {
-            return const Center(child: Text('No data available.'));
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

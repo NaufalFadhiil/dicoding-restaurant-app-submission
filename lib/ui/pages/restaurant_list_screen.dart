@@ -32,12 +32,10 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             return const Center(child: CircularProgressIndicator());
           } else if (provider.state is RestaurantListLoaded) {
             final restaurants = (provider.state as RestaurantListLoaded).data;
-            return ListView.builder(
-              itemCount: restaurants.length,
-              itemBuilder: (context, index) {
-                final restaurant = restaurants[index];
-                return RestaurantCard(restaurant: restaurant);
-              },
+            return ListView(
+              children: restaurants
+                  .map((restaurant) => RestaurantCard(restaurant: restaurant))
+                  .toList(),
             );
           } else if (provider.state is RestaurantListError) {
             final error = (provider.state as RestaurantListError).message;
