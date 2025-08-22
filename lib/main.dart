@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_api/data/services/api_service.dart';
 import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
+import 'package:restaurant_api/providers/restaurant_search_provider.dart';
 import 'package:restaurant_api/style/colors/restaurant_colors.dart';
 import 'package:restaurant_api/ui/main_screen.dart';
-import 'package:restaurant_api/ui/pages/restaurant_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<RestaurantDetailProvider>(
           create: (_) => RestaurantDetailProvider(apiService: ApiService()),
+        ),
+        ChangeNotifierProvider<RestaurantSearchProvider>(
+          create: (_) => RestaurantSearchProvider(apiService: ApiService()),
         ),
       ],
       child: MaterialApp(
