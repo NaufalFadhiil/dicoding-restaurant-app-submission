@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/data/services/api_service.dart';
+import 'package:restaurant_api/providers/navigation_provider.dart';
 import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
 import 'package:restaurant_api/providers/restaurant_search_provider.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
           create: (_) => RestaurantSearchProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
+        ChangeNotifierProvider<NavigationProvider>(
+          create: (_) => NavigationProvider(),
+        ),
       ],
       child: Consumer<ThemeNotifier>(
         builder: (context, theme, child) => MaterialApp(
