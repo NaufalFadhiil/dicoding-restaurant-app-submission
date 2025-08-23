@@ -59,6 +59,14 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: 8),
+                        Wrap(
+                          spacing: 8,
+                          children: restaurant.categories
+                              .map(
+                                (category) => Chip(label: Text(category.name)),
+                              )
+                              .toList(),
+                        ),
                         Row(
                           children: [
                             const Icon(

@@ -1,3 +1,5 @@
+import 'package:restaurant_api/data/models/category.dart';
+
 import 'menus.dart';
 
 class RestaurantDetail {
@@ -8,6 +10,7 @@ class RestaurantDetail {
   final String address;
   final String pictureId;
   final Menus menus;
+  final List<Category> categories;
   final double rating;
 
   RestaurantDetail({
@@ -18,6 +21,7 @@ class RestaurantDetail {
     required this.address,
     required this.pictureId,
     required this.menus,
+    required this.categories,
     required this.rating,
   });
 
@@ -30,6 +34,9 @@ class RestaurantDetail {
         address: json['address'] as String,
         pictureId: json['pictureId'] as String,
         menus: Menus.fromJson(json['menus']),
+        categories: List<Category>.from(
+          (json['categories'] as List).map((x) => Category.fromJson(x)),
+        ),
         rating: (json['rating'] as num).toDouble(),
       );
 }
