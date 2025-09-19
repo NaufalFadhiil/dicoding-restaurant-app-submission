@@ -28,7 +28,6 @@ void main() {
   });
 
   test('Mengembalikan daftar restoran ketika API berhasil', () async {
-    // Arrange
     final restaurants = [
       Restaurant(
         id: '1',
@@ -55,25 +54,24 @@ void main() {
       restaurants: restaurants,
     );
 
-    when(mockApiService.getRestaurantList()).thenAnswer((_) async => mockResponse);
+    when(
+      mockApiService.getRestaurantList(),
+    ).thenAnswer((_) async => mockResponse);
 
-    // Act
     await provider.fetchRestaurantList();
 
-    // Assert
     expect(provider.state, isA<RestaurantListLoaded>());
     final state = provider.state as RestaurantListLoaded;
     expect(state.data, restaurants);
   });
 
   test('Mengembalikan error ketika API gagal', () async {
-    // Arrange
-    when(mockApiService.getRestaurantList()).thenThrow(Exception("Failed to fetch"));
+    when(
+      mockApiService.getRestaurantList(),
+    ).thenThrow(Exception("Failed to fetch"));
 
-    // Act
     await provider.fetchRestaurantList();
 
-    // Assert
     expect(provider.state, isA<RestaurantListError>());
     final state = provider.state as RestaurantListError;
     expect(state.message, contains("Gagal memuat data restoran"));

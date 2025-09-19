@@ -49,18 +49,34 @@ class SettingsScreen extends StatelessWidget {
                       'Dapatkan notifikasi setiap hari pada pukul 11:00 Siang.',
                     ),
                     value: reminder.isDailyReminderActive,
-                    onChanged: (value) {
-                      reminder.toggleDailyReminder(value);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            value
-                                ? 'Daily Reminder aktif!'
-                                : 'Daily Reminder nonaktif!',
-                          ),
-                          duration: const Duration(seconds: 2),
-                        ),
+                    onChanged: (value) async {
+                      await reminder.toggleDailyReminder(
+                        value,
+                        onMessage: (msg) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(msg),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
                       );
+
+                      if (reminder.isDailyReminderActive) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Daily Reminder aktif!'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else if (!value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Daily Reminder nonaktif!'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }
                     },
                   );
                 },
