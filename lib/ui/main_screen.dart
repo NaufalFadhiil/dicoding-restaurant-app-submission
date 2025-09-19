@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/providers/navigation_provider.dart';
-import 'package:restaurant_api/providers/theme_notifier.dart';
 import 'package:restaurant_api/ui/pages/favorite_screen.dart';
 import 'package:restaurant_api/ui/pages/restaurant_list_screen.dart';
 import 'package:restaurant_api/ui/pages/restaurant_search_screen.dart';
+import 'package:restaurant_api/ui/pages/settings_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -29,13 +29,14 @@ class MainScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(_pageTitles[navigation.selectedIndex]),
             actions: [
-              Consumer<ThemeNotifier>(
-                builder: (context, theme, child) {
-                  return Switch(
-                    value: theme.themeMode == ThemeMode.dark,
-                    onChanged: (value) {
-                      theme.toggleTheme();
-                    },
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
                   );
                 },
               ),

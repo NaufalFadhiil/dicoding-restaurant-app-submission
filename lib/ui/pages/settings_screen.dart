@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_api/providers/theme_notifier.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Settings')),
+      body: Consumer<ThemeNotifier>(
+        builder: (context, theme, child) {
+          return ListView(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Pilih Tema Aplikasi',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SwitchListTile(
+                secondary: const Icon(Icons.dark_mode),
+                title: const Text('Dark Mode'),
+                subtitle: const Text(
+                  'Ganti tampilan menjadi mode terang atau gelap',
+                ),
+                value: theme.themeMode == ThemeMode.dark,
+                onChanged: (value) {
+                  theme.toggleTheme();
+                },
+              ),
+              const Divider(),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Notifications',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.notifications),
+                title: const Text('Daily Reminder'),
+                subtitle: const Text('Get notified every day at 11:00 AM'),
+                trailing: Switch(
+                  value: false, // nanti dihubungkan dengan SharedPreferences
+                  onChanged: (value) {
+                    // TODO: toggle reminder (poin 4)
+                  },
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
