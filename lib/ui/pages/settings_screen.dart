@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/providers/theme_notifier.dart';
+import 'package:restaurant_api/providers/reminder_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -39,16 +40,28 @@ class SettingsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.notifications),
-                title: const Text('Daily Reminder'),
-                subtitle: const Text('Get notified every day at 11:00 AM'),
-                trailing: Switch(
-                  value: false, // nanti dihubungkan dengan SharedPreferences
-                  onChanged: (value) {
-                    // TODO: toggle reminder (poin 4)
-                  },
-                ),
+              Consumer<ReminderProvider>(
+                builder: (context, reminder, _) {
+                  return SwitchListTile(
+                    secondary: const Icon(Icons.notifications),
+                    title: const Text('Daily Reminder'),
+                    subtitle: const Text('Get notified every day at 11:00 AM'),
+                    value: reminder.isDailyReminderActive,
+                    onChanged: (value) {
+                      reminder.toggleDailyReminder(value);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            value
+                                ? 'Daily Reminder aktif!'
+                                : 'Daily Reminder nonaktif!',
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ],
           );

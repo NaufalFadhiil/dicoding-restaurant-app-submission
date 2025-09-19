@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/data/services/api_service.dart';
+import 'package:restaurant_api/data/services/local_notification_service.dart';
 import 'package:restaurant_api/providers/favorite_provider.dart';
 import 'package:restaurant_api/providers/navigation_provider.dart';
+import 'package:restaurant_api/providers/reminder_provider.dart';
 import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
 import 'package:restaurant_api/providers/restaurant_search_provider.dart';
@@ -10,7 +12,11 @@ import 'package:restaurant_api/providers/theme_notifier.dart';
 import 'package:restaurant_api/style/colors/restaurant_colors.dart';
 import 'package:restaurant_api/ui/main_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await LocalNotificationService.init();
+
   runApp(const MyApp());
 }
 
@@ -35,6 +41,7 @@ class MyApp extends StatelessWidget {
           create: (_) => NavigationProvider(),
         ),
         ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (_) => ReminderProvider()),
       ],
       child: Consumer<ThemeNotifier>(
         builder: (context, theme, child) => MaterialApp(
