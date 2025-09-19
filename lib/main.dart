@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/data/services/api_service.dart';
+import 'package:restaurant_api/providers/favorite_provider.dart';
 import 'package:restaurant_api/providers/navigation_provider.dart';
 import 'package:restaurant_api/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_api/providers/restaurant_list_provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<NavigationProvider>(
           create: (_) => NavigationProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
       ],
       child: Consumer<ThemeNotifier>(
         builder: (context, theme, child) => MaterialApp(

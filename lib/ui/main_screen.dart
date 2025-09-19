@@ -1,8 +1,8 @@
-// lib/ui/main_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_api/providers/navigation_provider.dart';
 import 'package:restaurant_api/providers/theme_notifier.dart';
+import 'package:restaurant_api/ui/pages/favorite_screen.dart';
 import 'package:restaurant_api/ui/pages/restaurant_list_screen.dart';
 import 'package:restaurant_api/ui/pages/restaurant_search_screen.dart';
 
@@ -12,11 +12,13 @@ class MainScreen extends StatelessWidget {
   final List<Widget> _pages = const [
     RestaurantListScreen(),
     RestaurantSearchScreen(),
+    FavoriteScreen(),
   ];
 
   final List<String> _pageTitles = const [
     'Restaurant App',
     'Search Restaurants',
+    'Favorite Restaurants',
   ];
 
   @override
@@ -46,6 +48,10 @@ class MainScreen extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorite',
               ),
             ],
             currentIndex: navigation.selectedIndex,
