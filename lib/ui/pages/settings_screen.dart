@@ -36,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  'Notifications',
+                  'Notifikasi',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -45,7 +45,9 @@ class SettingsScreen extends StatelessWidget {
                   return SwitchListTile(
                     secondary: const Icon(Icons.notifications),
                     title: const Text('Daily Reminder'),
-                    subtitle: const Text('Get notified every day at 11:00 AM'),
+                    subtitle: const Text(
+                      'Dapatkan notifikasi setiap hari pada pukul 11:00 Siang.',
+                    ),
                     value: reminder.isDailyReminderActive,
                     onChanged: (value) {
                       reminder.toggleDailyReminder(value);
